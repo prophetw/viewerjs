@@ -262,7 +262,10 @@
         ratio = 1 + ratio;
       }
 
-      _this.zoomTo(imageData.width * ratio / imageData.naturalWidth, hasTooltip, _originalEvent);
+      if(imageData){
+        _this.zoomTo(imageData.width * ratio / imageData.naturalWidth, hasTooltip, _originalEvent);
+      }
+
 
       return _this;
     },
@@ -285,7 +288,9 @@
       var newHeight;
       var offset;
       var center;
-
+      if(!imageData){
+        return false;
+      }
       ratio = max(0, ratio);
 
       if (isNumber(ratio) && _this.isViewed && !_this.isPlayed && (_zoomable || options.zoomable)) {
@@ -343,7 +348,9 @@
      */
     rotate: function (degree) {
       var _this = this;
-
+      if(!_this.imageData){
+        return false;
+      }
       _this.rotateTo((_this.imageData.rotate || 0) + Number(degree));
 
       return _this;
@@ -358,7 +365,9 @@
     rotateTo: function (degree) {
       var _this = this;
       var imageData = _this.imageData;
-
+      if(!imageData){
+        return false;
+      }
       degree = Number(degree);
 
       if (isNumber(degree) && _this.isViewed && !_this.isPlayed && _this.options.rotatable) {
@@ -380,7 +389,9 @@
       var _this = this;
       var imageData = _this.imageData;
       var changed = false;
-
+      if(!imageData){
+        return false;
+      }
       // If "scaleY" is not present, its default value is "scaleX"
       if (isUndefined(scaleY)) {
         scaleY = scaleX;
@@ -415,7 +426,9 @@
      */
     scaleX: function (scaleX) {
       var _this = this;
-
+      if(!_this.imageData){
+        return false;
+      }
       _this.scale(scaleX, _this.imageData.scaleY);
 
       return _this;
@@ -428,7 +441,9 @@
      */
     scaleY: function (scaleY) {
       var _this = this;
-
+      if(!_this.imageData){
+        return false;
+      }
       _this.scale(_this.imageData.scaleX, scaleY);
 
       return _this;
@@ -660,7 +675,9 @@
     // Toggle the image size between its natural size and initial size
     toggle: function () {
       var _this = this;
-
+      if(!_this.imageData){
+        return false;
+      }
       if (_this.imageData.ratio === 1) {
         _this.zoomTo(_this.initialImageData.ratio, true);
       } else {

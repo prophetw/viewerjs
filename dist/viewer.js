@@ -1104,10 +1104,16 @@
           break;
 
         case 'flip-horizontal':
+            if(!imageData){
+              return false;
+            }
           _this.scaleX(-imageData.scaleX || -1);
           break;
 
         case 'flip-vertical':
+          if(!imageData){
+            return false;
+          }
           _this.scaleY(-imageData.scaleY || -1);
           break;
 
